@@ -8,7 +8,10 @@ class InventorySystem {
   public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
   public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
-  public InventorySystem() {
+  private final BackstagePassesQualityUpdater backstagePassesQualityUpdater;
+
+  public InventorySystem(BackstagePassesQualityUpdater backstagePassesQualityUpdater) {
+    this.backstagePassesQualityUpdater = backstagePassesQualityUpdater;
   }
 
   public void updateQuality(List<Item> items) {
@@ -17,11 +20,11 @@ class InventorySystem {
           && !item.name.equals(BACKSTAGE_PASSES)) {
         degradeQuality(item);
       } else {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-
-          if (item.name.equals(BACKSTAGE_PASSES)) {
-            updateQualityBackstagePasses(item);
+        if (item.name.equals(BACKSTAGE_PASSES)) {
+          backstagePassesQualityUpdater.updateQualityBackstagePasses(item);
+        } else {
+          if (item.quality < 50){
+            item.quality = item.quality + 1;
           }
         }
       }
@@ -41,20 +44,6 @@ class InventorySystem {
             item.quality = item.quality + 1;
           }
         }
-      }
-    }
-  }
-
-  private void updateQualityBackstagePasses(Item item) {
-    if (item.sellIn < 11) {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1;
-      }
-    }
-
-    if (item.sellIn < 6) {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1;
       }
     }
   }

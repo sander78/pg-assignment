@@ -14,7 +14,8 @@ public class GildedRoseTest {
   public static final String AGED_BRIE = "Aged Brie";
   public static final String NORMAL_ITEM = "Foo";
 
-  private final InventorySystem inventorySystem = new InventorySystem();
+  private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
+  private InventorySystem inventorySystem = new InventorySystem(backstagePassesQualityUpdater);
 
   @Test
   public void shouldDecrementSellInByOne() {

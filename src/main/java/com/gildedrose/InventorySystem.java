@@ -16,6 +16,10 @@ class InventorySystem {
 
   public void updateQuality(List<Item> items) {
     for (Item item : items) {
+      if (item.name.equals(SULFURAS)) {
+        continue;
+      }
+
       if (!item.name.equals(AGED_BRIE)
           && !item.name.equals(BACKSTAGE_PASSES)) {
         degradeQuality(item);
@@ -23,9 +27,7 @@ class InventorySystem {
         if (item.name.equals(BACKSTAGE_PASSES)) {
           backstagePassesQualityUpdater.updateQualityBackstagePasses(item);
         } else {
-          if (item.quality < 50){
-            item.quality = item.quality + 1;
-          }
+          increaseQuality(item);
         }
       }
 
@@ -40,25 +42,25 @@ class InventorySystem {
             item.quality = 0;
           }
         } else {
-          if (item.quality < 50) {
-            item.quality = item.quality + 1;
-          }
+          increaseQuality(item);
         }
       }
     }
   }
 
-  private void decreaseSellInValue(Item item) {
-    if (!item.name.equals(SULFURAS)) {
-      item.sellIn = item.sellIn - 1;
+  private void increaseQuality(Item item) {
+    if (item.quality < 50) {
+      item.quality = item.quality + 1;
     }
+  }
+
+  private void decreaseSellInValue(Item item) {
+    item.sellIn = item.sellIn - 1;
   }
 
   private void degradeQuality(Item item) {
     if (item.quality > 0) {
-      if (!item.name.equals(SULFURAS)) {
-        item.quality = item.quality - 1;
-      }
+      item.quality = item.quality - 1;
     }
   }
 }

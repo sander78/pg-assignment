@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+/**
+ * Left this code for now to make it easier for reviewer to verify that new code is correct.
+ */
 class GildedRose {
     Item[] items;
 

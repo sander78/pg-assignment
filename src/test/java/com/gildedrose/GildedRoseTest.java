@@ -2,6 +2,9 @@ package com.gildedrose;
 
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class GildedRoseTest {
@@ -11,14 +14,21 @@ public class GildedRoseTest {
   public static final String AGED_BRIE = "Aged Brie";
   public static final String NORMAL_ITEM = "Foo";
 
+  private final InventorySystem inventorySystem = new InventorySystem();
+
   @Test
   public void shouldDecrementSellInByOne() {
     Item[] items = new Item[]{new Item("foo", 0, 10)};
+    List<Item> itemList = Collections.singletonList(new Item("foo", 0, 10));
+
+    //TODO remove me
     GildedRose app = new GildedRose(items);
 
     app.updateQuality();
+    inventorySystem.updateQuality(itemList);
 
     assertEquals(-1, app.items[0].sellIn);
+    assertEquals(-1, itemList.get(0).sellIn);
   }
 
   @Test
@@ -56,10 +66,14 @@ public class GildedRoseTest {
 
   private void assertQualityForItem(String failureMessage, String itemName, int sellIn, int quality, int expectedQuality) {
     Item[] items = new Item[]{new Item(itemName, sellIn, quality)};
+    List<Item> itemList = Collections.singletonList(new Item(itemName, sellIn, quality));
+    //TODO remove me
     GildedRose app = new GildedRose(items);
 
     app.updateQuality();
+    inventorySystem.updateQuality(itemList);
 
     assertEquals(failureMessage, expectedQuality, app.items[0].quality);
+    assertEquals(failureMessage, expectedQuality, itemList.get(0).quality);
   }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>nl.sander78</groupId>
+  <artifactId>ps.assignment</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+    <junit.version>4.12</junit.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+
+      <!-- enforce all code is covered before starting refactoring -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>jacoco-initialize</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-check</id>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule implementation="org.jacoco.maven.RuleConfiguration">
+                  <element>BUNDLE</element>
+                  <limits>
+                    <!-- With current code base, coverage of 100% is impossible -->
+                    <limit implementation="org.jacoco.report.check.Limit">
+                      <counter>INSTRUCTION</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>0.9</minimum>
+                    </limit>
+                    <limit implementation="org.jacoco.report.check.Limit">
+                      <counter>CLASS</counter>
+                      <value>MISSEDCOUNT</value>
+                      <maximum>0</maximum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>

@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BackstagePassesQualityUpdaterTest {
 
-  private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
+  private QualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
 
   @Test
   public void shouldUpdateQualityOfBackstagePasses() {
@@ -25,7 +25,7 @@ public class BackstagePassesQualityUpdaterTest {
   private void assertQualityForItem(String failureMessage, int sellIn, int quality, int expectedQuality) {
     Item item = new Item(BACKSTAGE_PASSES, sellIn, quality);
 
-    backstagePassesQualityUpdater.updateQualityBackstagePasses(item);
+    backstagePassesQualityUpdater.updateQuality(item);
 
     assertEquals(failureMessage, expectedQuality, item.quality);
   }

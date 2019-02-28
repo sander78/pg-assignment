@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class BackstagePassesQualityUpdater {
+public class BackstagePassesQualityUpdater implements QualityUpdater {
 
   /**
    * Will update quality for Backstage passes following these rules:
@@ -12,7 +12,8 @@ public class BackstagePassesQualityUpdater {
    * Quality can never be more then 50
    *
    */
-  public void updateQualityBackstagePasses(Item item) {
+  @Override
+  public void updateQuality(Item item) {
     item.quality = item.quality + 1;
     if (item.sellIn < 11) {
       if (item.quality < 50) {

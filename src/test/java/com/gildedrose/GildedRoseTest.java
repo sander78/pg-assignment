@@ -15,7 +15,8 @@ public class GildedRoseTest {
   public static final String NORMAL_ITEM = "Foo";
 
   private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
-  private InventorySystem inventorySystem = new InventorySystem(backstagePassesQualityUpdater);
+  private AgedBrieQualityUpdater agedBrieQualityUpdater = new AgedBrieQualityUpdater();
+  private InventorySystem inventorySystem = new InventorySystem(backstagePassesQualityUpdater, agedBrieQualityUpdater);
 
   @Test
   public void shouldDecrementSellInByOne() {

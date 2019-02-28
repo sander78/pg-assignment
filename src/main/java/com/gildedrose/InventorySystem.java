@@ -9,9 +9,11 @@ class InventorySystem {
   public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
   private final BackstagePassesQualityUpdater backstagePassesQualityUpdater;
+  private final AgedBrieQualityUpdater agedBrieQualityUpdater;
 
-  public InventorySystem(BackstagePassesQualityUpdater backstagePassesQualityUpdater) {
+  public InventorySystem(BackstagePassesQualityUpdater backstagePassesQualityUpdater, AgedBrieQualityUpdater agedBrieQualityUpdater) {
     this.backstagePassesQualityUpdater = backstagePassesQualityUpdater;
+    this.agedBrieQualityUpdater = agedBrieQualityUpdater;
   }
 
   public void updateQuality(List<Item> items) {
@@ -25,9 +27,10 @@ class InventorySystem {
         degradeQuality(item);
       } else {
         if (item.name.equals(BACKSTAGE_PASSES)) {
-          backstagePassesQualityUpdater.updateQualityBackstagePasses(item);
+          backstagePassesQualityUpdater.updateQuality(item);
         } else {
-          increaseQuality(item);
+          // must be AGED_BRIE
+          agedBrieQualityUpdater.updateQuality(item);
         }
       }
 

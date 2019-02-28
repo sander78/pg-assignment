@@ -10,10 +10,12 @@ class InventorySystem {
 
   private final BackstagePassesQualityUpdater backstagePassesQualityUpdater;
   private final AgedBrieQualityUpdater agedBrieQualityUpdater;
+  private final NormalItemQualityUpdater normalItemQualityUpdater;
 
-  public InventorySystem(BackstagePassesQualityUpdater backstagePassesQualityUpdater, AgedBrieQualityUpdater agedBrieQualityUpdater) {
+  public InventorySystem(BackstagePassesQualityUpdater backstagePassesQualityUpdater, AgedBrieQualityUpdater agedBrieQualityUpdater, NormalItemQualityUpdater normalItemQualityUpdater) {
     this.backstagePassesQualityUpdater = backstagePassesQualityUpdater;
     this.agedBrieQualityUpdater = agedBrieQualityUpdater;
+    this.normalItemQualityUpdater = normalItemQualityUpdater;
   }
 
   public void updateQuality(List<Item> items) {
@@ -22,9 +24,8 @@ class InventorySystem {
         continue;
       }
 
-      if (!item.name.equals(AGED_BRIE)
-          && !item.name.equals(BACKSTAGE_PASSES)) {
-        degradeQuality(item);
+      if (itemDegrades(item)) {
+        normalItemQualityUpdater.updateQuality(item);
       } else {
         if (item.name.equals(BACKSTAGE_PASSES)) {
           backstagePassesQualityUpdater.updateQuality(item);
@@ -37,18 +38,27 @@ class InventorySystem {
       decreaseSellInValue(item);
 
       if (item.sellIn < 0) {
-        if (!item.name.equals(AGED_BRIE)) {
-          if (!item.name.equals(BACKSTAGE_PASSES)) {
-            //degrade quality again after sell date has past, so degrade by 2 in total
-            degradeQuality(item);
-          } else {
-            item.quality = 0;
-          }
-        } else {
-          increaseQuality(item);
-        }
+        handleItemPastSellDate(item);
       }
     }
+  }
+
+  private void handleItemPastSellDate(Item item) {
+    if (!item.name.equals(AGED_BRIE)) {
+      if (!item.name.equals(BACKSTAGE_PASSES)) {
+        //degrade quality again after sell date has past, so degrade by 2 in total
+        degradeQuality(item);
+      } else {
+        item.quality = 0;
+      }
+    } else {
+      increaseQuality(item);
+    }
+  }
+
+  private boolean itemDegrades(Item item) {
+    return !item.name.equals(AGED_BRIE)
+        && !item.name.equals(BACKSTAGE_PASSES);
   }
 
   private void increaseQuality(Item item) {

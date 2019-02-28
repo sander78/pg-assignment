@@ -16,7 +16,8 @@ public class GildedRoseTest {
 
   private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
   private AgedBrieQualityUpdater agedBrieQualityUpdater = new AgedBrieQualityUpdater();
-  private InventorySystem inventorySystem = new InventorySystem(backstagePassesQualityUpdater, agedBrieQualityUpdater);
+  private NormalItemQualityUpdater normalItemQualityUpdater = new NormalItemQualityUpdater();
+  private InventorySystem inventorySystem = new InventorySystem(backstagePassesQualityUpdater, agedBrieQualityUpdater, normalItemQualityUpdater);
 
   @Test
   public void shouldDecrementSellInByOne() {

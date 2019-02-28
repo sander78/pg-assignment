@@ -35,4 +35,9 @@ public class BackstagePassesQualityUpdater implements QualityUpdater {
       item.quality = 50;
     }
   }
+
+  @Override
+  public ItemType forType() {
+    return ItemType.BACKSTAGE_PASSES;
+  }
 }

@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class GildedRoseTest {
   private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
   private AgedBrieQualityUpdater agedBrieQualityUpdater = new AgedBrieQualityUpdater();
   private NormalItemQualityUpdater normalItemQualityUpdater = new NormalItemQualityUpdater();
-  private InventorySystem inventorySystem = new InventorySystem(backstagePassesQualityUpdater, agedBrieQualityUpdater, normalItemQualityUpdater);
+  private InventorySystem inventorySystem = new InventorySystem(Arrays.asList(backstagePassesQualityUpdater, agedBrieQualityUpdater, normalItemQualityUpdater));
 
   @Test
   public void shouldDecrementSellInByOne() {

@@ -8,4 +8,9 @@ public class NormalItemQualityUpdater implements QualityUpdater{
       item.quality = item.quality - 1;
     }
   }
+
+  @Override
+  public ItemType forType() {
+    return ItemType.NORMAL;
+  }
 }

@@ -8,14 +8,17 @@ class InventorySystem {
   public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
   public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
-  private final BackstagePassesQualityUpdater backstagePassesQualityUpdater;
-  private final AgedBrieQualityUpdater agedBrieQualityUpdater;
-  private final NormalItemQualityUpdater normalItemQualityUpdater;
+  private final List<QualityUpdater> qualityUpdaters;
 
-  public InventorySystem(BackstagePassesQualityUpdater backstagePassesQualityUpdater, AgedBrieQualityUpdater agedBrieQualityUpdater, NormalItemQualityUpdater normalItemQualityUpdater) {
-    this.backstagePassesQualityUpdater = backstagePassesQualityUpdater;
-    this.agedBrieQualityUpdater = agedBrieQualityUpdater;
-    this.normalItemQualityUpdater = normalItemQualityUpdater;
+  public InventorySystem(List<QualityUpdater> qualityUpdaters) {
+    this.qualityUpdaters = qualityUpdaters;
+  }
+
+  private QualityUpdater getUpdaterForType(Item item) {
+    ItemType itemType = ItemType.findByName(item.name);
+    return qualityUpdaters.stream()
+        .filter(qualityUpdater -> qualityUpdater.forType() == itemType)
+        .findFirst().orElseThrow(() -> new IllegalStateException("No updater found for itemType " + itemType));
   }
 
   public void updateQuality(List<Item> items) {
@@ -24,16 +27,8 @@ class InventorySystem {
         continue;
       }
 
-      if (itemDegrades(item)) {
-        normalItemQualityUpdater.updateQuality(item);
-      } else {
-        if (item.name.equals(BACKSTAGE_PASSES)) {
-          backstagePassesQualityUpdater.updateQuality(item);
-        } else {
-          // must be AGED_BRIE
-          agedBrieQualityUpdater.updateQuality(item);
-        }
-      }
+      QualityUpdater qualityUpdater = getUpdaterForType(item);
+      qualityUpdater.updateQuality(item);
 
       decreaseSellInValue(item);
 
@@ -54,11 +49,6 @@ class InventorySystem {
     } else {
       increaseQuality(item);
     }
-  }
-
-  private boolean itemDegrades(Item item) {
-    return !item.name.equals(AGED_BRIE)
-        && !item.name.equals(BACKSTAGE_PASSES);
   }
 
   private void increaseQuality(Item item) {

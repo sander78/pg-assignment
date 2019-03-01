@@ -1,5 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.quality;
 
+import com.gildedrose.Item;
 import org.junit.Test;
 
 import static com.gildedrose.ItemType.BACKSTAGE_PASSES;

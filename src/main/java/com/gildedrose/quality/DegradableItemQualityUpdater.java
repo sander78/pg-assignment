@@ -1,4 +1,7 @@
-package com.gildedrose;
+package com.gildedrose.quality;
+
+import com.gildedrose.Item;
+import com.gildedrose.ItemType;
 
 import java.util.Arrays;
 import java.util.List;

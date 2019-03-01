@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.gildedrose.quality.AgedBrieQualityUpdater;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

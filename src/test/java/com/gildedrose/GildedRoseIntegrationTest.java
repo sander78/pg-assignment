@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import com.gildedrose.quality.AgedBrieQualityUpdater;
+import com.gildedrose.quality.BackstagePassesQualityUpdater;
+import com.gildedrose.quality.DegradableItemQualityUpdater;
 import org.junit.Test;
 
 import java.util.Arrays;

@@ -1,5 +1,7 @@
-package com.gildedrose;
+package com.gildedrose.quality;
 
+import com.gildedrose.Item;
+import com.gildedrose.ItemType;
 import org.junit.Test;
 
 import static com.gildedrose.ItemType.CONJURED;

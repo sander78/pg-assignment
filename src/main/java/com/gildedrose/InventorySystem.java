@@ -2,7 +2,7 @@ package com.gildedrose;
 
 import java.util.List;
 
-class InventorySystem {
+public class InventorySystem {
 
   private final List<QualityUpdater> qualityUpdaters;
 

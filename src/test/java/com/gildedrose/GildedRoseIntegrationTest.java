@@ -61,13 +61,6 @@ public class GildedRoseIntegrationTest {
     assertQualityForItem("Quality should never change", SULFURAS.getDescription(), 0, 80, 80);
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void shouldFailWhenNoUpdaterFound() {
-    inventorySystem = new InventorySystem(Collections.singletonList(backstagePassesQualityUpdater));
-
-    assertQualityForItem("N/A", BRIE.getDescription(), 1, 40, 41);
-  }
-
   private void assertQualityForItem(String failureMessage, String itemName, int sellIn, int quality, int expectedQuality) {
     List<Item> itemList = Collections.singletonList(new Item(itemName, sellIn, quality));
 

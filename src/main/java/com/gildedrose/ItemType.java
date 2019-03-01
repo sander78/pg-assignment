@@ -20,4 +20,8 @@ public enum ItemType {
         .filter(itemType -> itemType.description.equals(description))
         .findAny().orElse(NORMAL);
   }
+
+  public String getDescription() {
+    return description;
+  }
 }

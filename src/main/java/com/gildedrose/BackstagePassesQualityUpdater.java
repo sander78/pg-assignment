@@ -4,10 +4,10 @@ public class BackstagePassesQualityUpdater implements QualityUpdater {
 
   /**
    * Will update quality for Backstage passes following these rules:
-   * When sellIn > 10 increase by 1
-   * When sellIn > 5 increase by 2
-   * When sellIn > 0 increase by 3
-   * When sellIn <= set quality 0
+   * When sellIn >= 10 increase by 1
+   * When sellIn >= 5 increase by 2
+   * When sellIn >= 0 increase by 3
+   * When sellIn < 0 set quality 0
    *
    * Quality can never be more then 50
    *

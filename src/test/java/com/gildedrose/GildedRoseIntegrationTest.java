@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import com.gildedrose.quality.AgedBrieQualityUpdater;
+import com.gildedrose.quality.BackstagePassesQualityUpdater;
+import com.gildedrose.quality.DegradableItemQualityUpdater;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -16,8 +19,8 @@ public class GildedRoseIntegrationTest {
 
   private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
   private AgedBrieQualityUpdater agedBrieQualityUpdater = new AgedBrieQualityUpdater();
-  private NormalItemQualityUpdater normalItemQualityUpdater = new NormalItemQualityUpdater();
-  private InventorySystem inventorySystem = new InventorySystem(Arrays.asList(backstagePassesQualityUpdater, agedBrieQualityUpdater, normalItemQualityUpdater));
+  private DegradableItemQualityUpdater degradableItemQualityUpdater = new DegradableItemQualityUpdater();
+  private InventorySystem inventorySystem = new InventorySystem(Arrays.asList(backstagePassesQualityUpdater, agedBrieQualityUpdater, degradableItemQualityUpdater));
 
   @Test
   public void shouldDecrementSellInByOne() {

@@ -1,9 +1,11 @@
-package com.gildedrose;
+package com.gildedrose.quality;
 
+import com.gildedrose.Item;
 import org.junit.Test;
 
+import static com.gildedrose.ItemType.BACKSTAGE_PASSES;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class BackstagePassesQualityUpdaterTest {
 
@@ -21,12 +23,13 @@ public class BackstagePassesQualityUpdaterTest {
   }
 
   @Test
-  public void shouldForType() {
-    assertSame(ItemType.BACKSTAGE_PASSES, updater.forType());
+  public void shouldHandlePasses() {
+    assertTrue(updater.forTypes().contains(BACKSTAGE_PASSES));
+    assertEquals(1, updater.forTypes().size());
   }
 
   private void assertQualityForItem(String failureMessage, int sellIn, int quality, int expectedQuality) {
-    Item item = new Item(ItemType.BACKSTAGE_PASSES.getDescription(), sellIn, quality);
+    Item item = new Item(BACKSTAGE_PASSES.getDescription(), sellIn, quality);
 
     updater.updateQuality(item);
 

@@ -1,5 +1,10 @@
 package com.gildedrose;
 
+import java.util.Collections;
+import java.util.List;
+
+import static com.gildedrose.ItemType.BRIE;
+
 public class AgedBrieQualityUpdater implements QualityUpdater{
 
   @Override
@@ -16,7 +21,7 @@ public class AgedBrieQualityUpdater implements QualityUpdater{
   }
 
   @Override
-  public ItemType forType() {
-    return ItemType.BRIE;
+  public List<ItemType> forTypes() {
+    return Collections.singletonList(BRIE);
   }
 }

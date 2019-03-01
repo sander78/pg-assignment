@@ -2,8 +2,9 @@ package com.gildedrose;
 
 import org.junit.Test;
 
+import static com.gildedrose.ItemType.BRIE;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class AgedBrieQualityUpdaterTest {
 
@@ -17,12 +18,13 @@ public class AgedBrieQualityUpdaterTest {
   }
 
   @Test
-  public void shouldForType() {
-    assertSame(ItemType.BRIE, updater.forType());
+  public void shouldHandleBrie() {
+    assertTrue(updater.forTypes().contains(BRIE));
+    assertEquals(1, updater.forTypes().size());
   }
 
   private void assertQualityForItem(String failureMessage, int sellIn, int quality, int expectedQuality) {
-    Item item = new Item(ItemType.BRIE.getDescription(), sellIn, quality);
+    Item item = new Item(BRIE.getDescription(), sellIn, quality);
 
     updater.updateQuality(item);
 

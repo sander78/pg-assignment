@@ -16,8 +16,8 @@ public class GildedRoseIntegrationTest {
 
   private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
   private AgedBrieQualityUpdater agedBrieQualityUpdater = new AgedBrieQualityUpdater();
-  private NormalItemQualityUpdater normalItemQualityUpdater = new NormalItemQualityUpdater();
-  private InventorySystem inventorySystem = new InventorySystem(Arrays.asList(backstagePassesQualityUpdater, agedBrieQualityUpdater, normalItemQualityUpdater));
+  private DegradableItemQualityUpdater degradableItemQualityUpdater = new DegradableItemQualityUpdater();
+  private InventorySystem inventorySystem = new InventorySystem(Arrays.asList(backstagePassesQualityUpdater, agedBrieQualityUpdater, degradableItemQualityUpdater));
 
   @Test
   public void shouldDecrementSellInByOne() {

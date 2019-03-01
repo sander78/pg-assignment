@@ -12,7 +12,7 @@ public class InventorySystem {
 
   private QualityUpdater getUpdaterForType(ItemType itemType) {
     return qualityUpdaters.stream()
-        .filter(qualityUpdater -> qualityUpdater.forType() == itemType)
+        .filter(qualityUpdater -> qualityUpdater.forTypes().contains(itemType))
         .findFirst().orElseThrow(() -> new IllegalStateException("No updater found for itemType " + itemType));
   }
 

@@ -42,7 +42,7 @@ public class InventorySystemTest {
   @Test
   public void shouldFirstDecreaseSellInAndThenUpdateQualityOfItem() {
     Item item = new Item(ItemType.BRIE.getDescription(), 5, 80);
-    Mockito.when(agedBrieQualityUpdater.forType()).thenReturn(ItemType.BRIE);
+    Mockito.when(agedBrieQualityUpdater.forTypes()).thenReturn(Collections.singletonList(ItemType.BRIE));
 
     inventorySystem.updateQuality(Collections.singletonList(item));
 

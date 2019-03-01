@@ -1,5 +1,10 @@
 package com.gildedrose;
 
+import java.util.Collections;
+import java.util.List;
+
+import static com.gildedrose.ItemType.BACKSTAGE_PASSES;
+
 public class BackstagePassesQualityUpdater implements QualityUpdater {
 
   /**
@@ -29,7 +34,7 @@ public class BackstagePassesQualityUpdater implements QualityUpdater {
   }
 
   @Override
-  public ItemType forType() {
-    return ItemType.BACKSTAGE_PASSES;
+  public List<ItemType> forTypes() {
+    return Collections.singletonList(BACKSTAGE_PASSES);
   }
 }

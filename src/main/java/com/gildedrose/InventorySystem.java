@@ -1,16 +1,16 @@
 package com.gildedrose;
 
 import com.gildedrose.quality.QualityUpdater;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@RequiredArgsConstructor
+@Component
 public class InventorySystem {
 
   private final List<QualityUpdater> qualityUpdaters;
-
-  public InventorySystem(List<QualityUpdater> qualityUpdaters) {
-    this.qualityUpdaters = qualityUpdaters;
-  }
 
   private QualityUpdater getUpdaterForType(ItemType itemType) {
     return qualityUpdaters.stream()

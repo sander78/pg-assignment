@@ -2,6 +2,7 @@ package com.gildedrose.quality;
 
 import com.gildedrose.Item;
 import com.gildedrose.ItemType;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 import static com.gildedrose.ItemType.CONJURED;
 import static com.gildedrose.ItemType.NORMAL;
 
+@Component
 public class DegradableItemQualityUpdater implements QualityUpdater{
 
   @Override

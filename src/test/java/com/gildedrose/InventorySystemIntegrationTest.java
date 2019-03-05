@@ -1,11 +1,11 @@
 package com.gildedrose;
 
-import com.gildedrose.quality.AgedBrieQualityUpdater;
-import com.gildedrose.quality.BackstagePassesQualityUpdater;
-import com.gildedrose.quality.DegradableItemQualityUpdater;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,12 +15,12 @@ import static com.gildedrose.ItemType.NORMAL;
 import static com.gildedrose.ItemType.SULFURAS;
 import static org.junit.Assert.assertEquals;
 
-public class GildedRoseIntegrationTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
+public class InventorySystemIntegrationTest {
 
-  private BackstagePassesQualityUpdater backstagePassesQualityUpdater = new BackstagePassesQualityUpdater();
-  private AgedBrieQualityUpdater agedBrieQualityUpdater = new AgedBrieQualityUpdater();
-  private DegradableItemQualityUpdater degradableItemQualityUpdater = new DegradableItemQualityUpdater();
-  private InventorySystem inventorySystem = new InventorySystem(Arrays.asList(backstagePassesQualityUpdater, agedBrieQualityUpdater, degradableItemQualityUpdater));
+  @Autowired
+  private InventorySystem inventorySystem;
 
   @Test
   public void shouldDecrementSellInByOne() {

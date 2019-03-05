@@ -2,12 +2,14 @@ package com.gildedrose.quality;
 
 import com.gildedrose.Item;
 import com.gildedrose.ItemType;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
 import static com.gildedrose.ItemType.BRIE;
 
+@Component
 public class AgedBrieQualityUpdater implements QualityUpdater{
 
   @Override
